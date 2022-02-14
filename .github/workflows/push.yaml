@@ -1,0 +1,20 @@
+name: Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking the repository
+        uses: actions/checkout@v2
+
+      - name: Debug information
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+          STEPS_CONTEXT: ${{ toJSON(steps) }}
+          NEEDS_CONTEXT: ${{ toJSON(needs) }}
+        run: env
