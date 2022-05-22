@@ -17,6 +17,7 @@ jobs:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
           STEPS_CONTEXT: ${{ toJSON(steps) }}
           NEEDS_CONTEXT: ${{ toJSON(needs) }}
+        run: |
 
       - name: Fail
         run: exit 1
