@@ -24,7 +24,7 @@ jobs:
               repo: 'workflow-reproductions',
               base: 'main',
               head: 'develop',
-              commit_message: github-actions: merge develop into main'
-            });
+              commit_message: 'github-actions: merge develop into main'
+            })
 
             console.log(result)
