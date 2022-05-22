@@ -7,13 +7,24 @@ jobs:
   merge-develop-into-main:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug information
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+          STEPS_CONTEXT: ${{ toJSON(steps) }}
+          NEEDS_CONTEXT: ${{ toJSON(needs) }}
+        run: env
+
       - name: Merge develop into main
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.TOKEN }}
           script: |
-            const result = await github.rest.repos.listForUser({
-              username: 'JensDll'
-            })
+            const result = await github.rest.repos.merge({
+              owner: '${{ github.repository_owner }}',
+              repo: 'workflow-reproductions',
+              base: 'main',
+              head: 'develop',
+              commit_message: github-actions: merge develop into main'
+            });
 
             console.log(result)
