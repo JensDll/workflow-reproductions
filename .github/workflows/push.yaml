@@ -15,9 +15,16 @@ jobs:
       - name: Debug information
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
+          ENV_CONTEXT: ${{ toJSON(env) }}
+          JOB_CONTEXT: ${{ toJSON(job) }}
           STEPS_CONTEXT: ${{ toJSON(steps) }}
+          RUNNER_CONTEXT: ${{ toJSON(runner) }}
+          SECRETS_CONTEXT: ${{ toJSON(secrets) }}
+          STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
+          MATRIX_CONTEXT: ${{ toJSON(matrix) }}
           NEEDS_CONTEXT: ${{ toJSON(needs) }}
-        run: |
+        run: echo "Done"
 
-      - name: Fail
-        run: exit 1
+      - name: Main
+        run: |
+          sleep 4 && echo "Done"
