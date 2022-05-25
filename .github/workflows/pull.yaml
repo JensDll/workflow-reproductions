@@ -1,0 +1,30 @@
+name: Pull
+
+on:
+  pull_request:
+    branches:
+      - staging
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking the repository
+        uses: actions/checkout@v3
+
+      - name: Debug information
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+          ENV_CONTEXT: ${{ toJSON(env) }}
+          JOB_CONTEXT: ${{ toJSON(job) }}
+          STEPS_CONTEXT: ${{ toJSON(steps) }}
+          RUNNER_CONTEXT: ${{ toJSON(runner) }}
+          SECRETS_CONTEXT: ${{ toJSON(secrets) }}
+          STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
+          MATRIX_CONTEXT: ${{ toJSON(matrix) }}
+          NEEDS_CONTEXT: ${{ toJSON(needs) }}
+        run: echo "Done"
+
+      - name: Main
+        run: |
+          sleep 4 && echo "Done"
