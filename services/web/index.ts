@@ -129,4 +129,11 @@ async function pullMerge(options: Options) {
   // }
 }
 
-await pullMerge({ title: crypto.randomUUID(), base: 'main', head: 'staging' })
+// await pullMerge({ title: crypto.randomUUID(), base: 'main', head: 'staging' })
+
+await github.rest.actions.createWorkflowDispatch({
+  owner,
+  repo,
+  ref: 'staging',
+  workflow_id: 'merge-pull-main.yaml'
+})

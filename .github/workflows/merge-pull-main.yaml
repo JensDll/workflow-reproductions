@@ -1,9 +1,12 @@
 name: Merge pull main
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      pull_number:
+        description: The pull request number to merge
+        required: true
+        type: string
 
 jobs:
   main:
@@ -23,6 +26,7 @@ jobs:
           STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
           MATRIX_CONTEXT: ${{ toJSON(matrix) }}
           NEEDS_CONTEXT: ${{ toJSON(needs) }}
+          INPUTS_CONTEXT: ${{ toJSON(inputs) }}
         run: echo "Done"
 
       - name: Running tests
