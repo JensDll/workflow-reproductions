@@ -1,8 +1,8 @@
 name: Merge main
 
 on:
-  schedule:
-    - '* * * * *'
+  # schedule:
+  #   - '* * * * *'
   workflow_dispatch:
 
 jobs:
