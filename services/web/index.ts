@@ -23,11 +23,19 @@ type Options = {
 async function pullMerge(options: Options) {
   options.merge_method ??= 'github_merge'
 
-  const { data: head } = await github.rest.git.getRef({
+  const { data: headRef } = await github.rest.git.getRef({
     owner,
     repo,
     ref: `heads/${options.head}`
   })
+
+  const { data: headCommit } = await github.rest.git.getCommit({
+    owner,
+    repo,
+    commit_sha: headRef.object.sha
+  })
+
+  console.log(headCommit)
 
   const { data: pullRequest } = await github.rest.pulls.create({
     owner,
@@ -39,28 +47,28 @@ async function pullMerge(options: Options) {
     commit_message: options.title
   })
 
-  await github.rest.pulls.merge({
-    owner,
-    repo,
-    pull_number: pullRequest.number,
-    merge_method: 'merge'
-  })
+  // await github.rest.pulls.merge({
+  //   owner,
+  //   repo,
+  //   pull_number: pullRequest.number,
+  //   merge_method: 'merge'
+  // })
 
-  await github.rest.git.updateRef({
-    owner,
-    repo,
-    ref: `heads/${options.base}`,
-    sha: head.object.sha,
-    force: true
-  })
+  // await github.rest.git.updateRef({
+  //   owner,
+  //   repo,
+  //   ref: `heads/${options.base}`,
+  //   sha: headRef.object.sha,
+  //   force: true
+  // })
 
-  if (options.deleteHead) {
-    await github.rest.git.deleteRef({
-      owner,
-      repo,
-      ref: `heads/${options.head}`
-    })
-  }
+  // if (options.deleteHead) {
+  //   await github.rest.git.deleteRef({
+  //     owner,
+  //     repo,
+  //     ref: `heads/${options.head}`
+  //   })
+  // }
 }
 
 await pullMerge({ title: crypto.randomUUID(), base: 'main', head: 'staging' })

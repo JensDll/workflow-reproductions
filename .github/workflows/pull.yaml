@@ -2,8 +2,6 @@ name: Pull
 
 on:
   pull_request:
-    branches:
-      - staging
 
 jobs:
   main:
