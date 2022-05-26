@@ -10,14 +10,19 @@ const github = new Octokit({
 const owner = 'JensDll'
 const repo = 'workflow-reproductions'
 
+type MergeMethod = 'github_merge' | 'github_squash' | 'github_rebase' | 'rebase'
+
 type Options = {
   title: string
   head: string
   base: string
   deleteHead?: boolean
+  merge_method?: MergeMethod
 }
 
 async function pullMerge(options: Options) {
+  options.merge_method ??= 'github_merge'
+
   const { data: head } = await github.rest.git.getRef({
     owner,
     repo,
