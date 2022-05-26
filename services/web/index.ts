@@ -131,12 +131,16 @@ async function pullMerge(options: Options) {
 
 // await pullMerge({ title: crypto.randomUUID(), base: 'main', head: 'staging' })
 
-await github.rest.actions.createWorkflowDispatch({
+const { data: pullRequest } = await github.rest.pulls.get({
   owner,
   repo,
-  ref: 'staging',
-  workflow_id: 'merge-pull-main.yaml',
-  inputs: {
-    pull_number: '10'
-  }
+  pull_number: 17
 })
+
+console.log(pullRequest)
+
+let mergeMethod = 'merge'.replace(/^github_/, '')
+
+switch (mergeMethod) {
+  case 'github_merge':
+}
