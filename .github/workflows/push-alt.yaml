@@ -1,7 +1,7 @@
-name: Pull
+name: Push
 
 on:
-  pull_request:
+  push:
     branches:
       - staging
 
@@ -27,4 +27,4 @@ jobs:
 
       - name: Main
         run: |
-          sleep 4 && echo "Done"
+          sleep 4 && exit 1
