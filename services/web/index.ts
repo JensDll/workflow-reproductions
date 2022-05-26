@@ -58,4 +58,4 @@ async function pullMerge(options: Options) {
   }
 }
 
-await pullMerge({ title: crypto.randomUUID(), base: 'staging', head: 'main' })
+await pullMerge({ title: crypto.randomUUID(), base: 'main', head: 'staging' })
