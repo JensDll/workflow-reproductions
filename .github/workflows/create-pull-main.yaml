@@ -35,6 +35,6 @@ jobs:
       - name: Creating pull request
         uses: ./.github/actions/create-pull
         with:
-          base: staging
-          head: main
+          base: main
+          head: staging
           title: 'github-actions: merge staging to main'
