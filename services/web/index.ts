@@ -135,5 +135,8 @@ await github.rest.actions.createWorkflowDispatch({
   owner,
   repo,
   ref: 'staging',
-  workflow_id: 'merge-pull-main.yaml'
+  workflow_id: 'merge-pull-main.yaml',
+  inputs: {
+    pull_number: '10'
+  }
 })

@@ -33,4 +33,4 @@ runs:
             commit_message: '${{ inputs.title }}',
           })
 
-          console.log(pullRequest.number);
+          console.log(pullRequest);
