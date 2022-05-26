@@ -37,7 +37,7 @@ async function checkWorkflowRun(
   })
 
   const runs = workflow_runs.filter(run => run.head_sha === ref.object.sha)
-
+  console.log(runs)
   console.log(
     `Found ${runs.length} workflow run result(s) for commit: ${ref.object.sha}`
   )
@@ -46,15 +46,9 @@ async function checkWorkflowRun(
   let anyFailed = false
 
   for (const run of runs) {
-    if (run.status === 'failure') {
-      anyFailed = true
+    if (run.conclusion === 'failure') {
+      throw new Error(`[Aborting merge] Workflow run failed: ${run.html_url}`)
     }
-  }
-
-  if (anyFailed) {
-    throw new Error(
-      'Aborting merge: One or more workflow runs failed for this commit'
-    )
   }
 
   // if (lastRun) {

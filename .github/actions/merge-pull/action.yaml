@@ -1,0 +1,36 @@
+name: Merge pull
+
+description: Creates a pull reuqest
+
+inputs:
+  pull_number:
+    description: The pull request number
+    required: true
+  merge_method:
+    description: 'The merge method to use. Valid values are:
+      github_merge, github_squash, github_rebase, rebase'
+    required: false
+    default: 'rebase'
+  delete_head:
+    description: Delete the head branch after merge
+    required: false
+    default: 'false'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Merging pull request
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const { data: pullRequest } = await github.rest.pulls.create({
+            owner: '${{ github.event.repository.owner.login }}',
+            repo: '${{ github.event.repository.name }}',
+            base: '${{ inputs.base }}',
+            head: '${{ inputs.head }}',
+            title: '${{ inputs.title }}',
+            body: '',
+            commit_message: '${{ inputs.title }}',
+          })
+
+          console.log(pullRequest.number);
