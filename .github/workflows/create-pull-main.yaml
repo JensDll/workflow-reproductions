@@ -1,14 +1,24 @@
 name: Create pull main
 
 on:
-  schedule:
-    - cron: '* * * * *'
+  # schedule:
+  #   - cron: '* * * * *'
   workflow_dispatch:
 
 jobs:
+  should-run:
+    uses: JensDll/should-run/.github/workflows/main.yaml@main
+    with:
+      projects: /
+
   main:
+    needs:
+      - should-run
     runs-on: ubuntu-latest
     steps:
+      - name: Checking the repository
+        uses: actions/checkout@v3
+
       - name: Debug information
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}

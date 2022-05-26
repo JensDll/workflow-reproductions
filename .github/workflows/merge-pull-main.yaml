@@ -1,4 +1,4 @@
-name: Merge main pull
+name: Merge pull main
 
 on:
   pull_request:
