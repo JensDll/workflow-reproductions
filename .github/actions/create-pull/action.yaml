@@ -28,9 +28,6 @@ runs:
         JOB_CONTEXT: ${{ toJSON(job) }}
         STEPS_CONTEXT: ${{ toJSON(steps) }}
         RUNNER_CONTEXT: ${{ toJSON(runner) }}
-        STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
-        MATRIX_CONTEXT: ${{ toJSON(matrix) }}
-        NEEDS_CONTEXT: ${{ toJSON(needs) }}
       run: env
 
     - name: Creating pull request
