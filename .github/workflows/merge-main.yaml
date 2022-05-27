@@ -30,6 +30,7 @@ jobs:
           base: main
           head: staging
           title: 'github-actions: merge staging into main'
+          github_token: ${{ secrets.github_token }}
 
       - name: Running tests
         run: echo "Done"

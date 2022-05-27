@@ -12,6 +12,9 @@ inputs:
   title:
     description: The title of the pull request
     required: true
+  github_token:
+    description: The GitHub token to use
+    required: true
 outputs:
   pull_number:
     description: The pull request number
@@ -34,7 +37,7 @@ runs:
       id: create-pull
       uses: actions/github-script@v6
       with:
-        github-token: ${{ env.GITHUB_TOKEN }}
+        github-token: ${{ inputs.github_token }}
         script: |
           const { data: pullRequest } = await github.rest.pulls.create({
             owner: '${{ github.event.repository.owner.login }}',
