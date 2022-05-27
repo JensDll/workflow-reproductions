@@ -130,17 +130,3 @@ async function pullMerge(options: Options) {
 }
 
 // await pullMerge({ title: crypto.randomUUID(), base: 'main', head: 'staging' })
-
-const { data: pullRequest } = await github.rest.pulls.get({
-  owner,
-  repo,
-  pull_number: 17
-})
-
-console.log(pullRequest)
-
-let mergeMethod = 'merge'.replace(/^github_/, '')
-
-switch (mergeMethod) {
-  case 'github_merge':
-}
