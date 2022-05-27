@@ -28,11 +28,11 @@ runs:
         JOB_CONTEXT: ${{ toJSON(job) }}
         STEPS_CONTEXT: ${{ toJSON(steps) }}
         RUNNER_CONTEXT: ${{ toJSON(runner) }}
-        SECRETS_CONTEXT: ${{ toJSON(secrets) }}
         STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
         MATRIX_CONTEXT: ${{ toJSON(matrix) }}
         NEEDS_CONTEXT: ${{ toJSON(needs) }}
       run: env
+
     - name: Creating pull request
       id: create-pull
       uses: actions/github-script@v6
