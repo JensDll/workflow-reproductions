@@ -34,6 +34,7 @@ runs:
       id: create-pull
       uses: actions/github-script@v6
       with:
+        github-token: ${{ secrets.github_token }}
         script: |
           const { data: pullRequest } = await github.rest.pulls.create({
             owner: '${{ github.event.repository.owner.login }}',
